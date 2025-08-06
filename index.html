@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Sorteador de Números</title>
+  <title>Sorteador de números e nomes</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -10,29 +10,48 @@
       padding: 30px;
       background-color: #f2f2f2;
     }
+
     input, button {
       padding: 10px;
       font-size: 16px;
       margin: 10px;
     }
-    #resultado {
+
+    #resultado, #resultado-nome {
       font-size: 24px;
       margin-top: 20px;
       color: green;
     }
+
+    footer {
+      margin-top: 60px;
+      font-size: 14px;
+      color: gray;
+    }
   </style>
 </head>
 <body>
-  <h1>Gerador de Números para Sorteios</h1>
+
+  <h1>Sorteador de números e nomes</h1>
   <p>Digite o intervalo desejado:</p>
-  <input type="number" id="min" placeholder="Mínimo" />
-  <input type="number" id="max" placeholder="Máximo" />
+  <input type="number" id="min" placeholder="Mínimo">
+  <input type="number" id="max" placeholder="Máximo">
   <br>
-  <button onclick="sortear()">Sortear Número</button>
-  <div id="resultado"></div>
+  <button onclick="sortearNumero()">Sortear Número</button>
+  <p id="resultado"></p>
+
+  <h2>Sorteio de Nomes</h2>
+  <textarea id="nomes" placeholder="Cole os nomes aqui (um por linha)" rows="5" cols="40"></textarea>
+  <br>
+  <button onclick="sortearNome()">Sortear Nome</button>
+  <p id="resultado-nome"></p>
+
+  <footer>
+    por: <a target="_blank">@mismim_yoo</a>
+  </footer>
 
   <script>
-    function sortear() {
+    function sortearNumero() {
       const min = parseInt(document.getElementById('min').value);
       const max = parseInt(document.getElementById('max').value);
 
@@ -42,34 +61,21 @@
       }
 
       const numero = Math.floor(Math.random() * (max - min + 1)) + min;
-      document.getElementById('resultado').textContent = "Número sorteado: " + numero;
+      document.getElementById('resultado').innerText = "Número sorteado: " + numero;
+    }
+
+    function sortearNome() {
+      const entrada = document.getElementById("nomes").value;
+      const lista = entrada.split(/\r?\n/).map(nome => nome.trim()).filter(nome => nome);
+
+      if (lista.length === 0) {
+        document.getElementById("resultado-nome").innerText = "Digite pelo menos um nome válido.";
+        return;
+      }
+
+      const sorteado = lista[Math.floor(Math.random() * lista.length)];
+      document.getElementById("resultado-nome").innerText = "Nome sorteado: " + sorteado;
     }
   </script>
 </body>
 </html>
-
-<<h2>Sorteio de Nomes</h2>
-
-<textarea id="nomes" placeholder="Cole os nomes aqui (um por linha)" rows="5" cols="40"></textarea>
-<br>
-<button onclick="sortearNome()">Sortear Nome</button>
-<p id="resultado-nome"></p>
-
-<script>
-  function sortearNome() {
-    const entrada = document.getElementById("nomes").value;
-    const lista = entrada.split(/\r?\n/).map(nome => nome.trim()).filter(nome => nome);
-
-    if (lista.length === 0) {
-      document.getElementById("resultado-nome").innerText = "Digite pelo menos um nome válido.";
-      return;
-    }
-
-    const sorteado = lista[Math.floor(Math.random() * lista.length)];
-    document.getElementById("resultado-nome").innerText = "Nome sorteado: " + sorteado;
-  }
-
-    <footer>
-    by: <a href="https://instagram.com/mismim_yoo" target="_blank">@mismim_yoo</a>
-  </footer>
-</script>
