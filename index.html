@@ -47,3 +47,25 @@
   </script>
 </body>
 </html>
+
+<h2>Sorteio de Nomes</h2>
+
+<textarea id="nomes" placeholder="Digite os nomes separados por vírgula" rows="5" cols="40"></textarea>
+<br>
+<button onclick="sortearNome()">Sortear Nome</button>
+<p id="resultado-nome"></p>
+
+<script>
+  function sortearNome() {
+    const entrada = document.getElementById("nomes").value;
+    const lista = entrada.split(",").map(nome => nome.trim()).filter(nome => nome);
+    
+    if (lista.length === 0) {
+      document.getElementById("resultado-nome").innerText = "Digite pelo menos um nome válido.";
+      return;
+    }
+
+    const sorteado = lista[Math.floor(Math.random() * lista.length)];
+    document.getElementById("resultado-nome").innerText = "Nome sorteado: " + sorteado;
+  }
+      </script>
