@@ -1,1 +1,49 @@
-Sorteios grátis 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Sorteador de Números</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+      background-color: #f2f2f2;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+    }
+    #resultado {
+      font-size: 24px;
+      margin-top: 20px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>Gerador de Números para Sorteios</h1>
+  <p>Digite o intervalo desejado:</p>
+  <input type="number" id="min" placeholder="Mínimo" />
+  <input type="number" id="max" placeholder="Máximo" />
+  <br>
+  <button onclick="sortear()">Sortear Número</button>
+  <div id="resultado"></div>
+
+  <script>
+    function sortear() {
+      const min = parseInt(document.getElementById('min').value);
+      const max = parseInt(document.getElementById('max').value);
+
+      if (isNaN(min) || isNaN(max) || min >= max) {
+        alert("Informe um intervalo válido!");
+        return;
+      }
+
+      const numero = Math.floor(Math.random() * (max - min + 1)) + min;
+      document.getElementById('resultado').textContent = "Número sorteado: " + numero;
+    }
+  </script>
+</body>
+</html>
